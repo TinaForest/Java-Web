@@ -21,6 +21,8 @@ public class LoginServlet extends HttpServlet {
             //success
             req.getRequestDispatcher("/pages/user/login_success.jsp").forward(req, resp);
         } else {
+            req.setAttribute("msg", "用户名或密码错误！");
+            req.setAttribute("username", username);
             //failure
             req.getRequestDispatcher("/pages/user/login.jsp").forward(req, resp);
         }

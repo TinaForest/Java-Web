@@ -107,13 +107,16 @@
 						<div class="login_box">
 							<div class="tit">
 								<h1>注册尚硅谷会员</h1>
-								<span class="errorMsg"></span>
+								<span class="errorMsg">
+									<%=request.getAttribute("msg")==null ? "" : request.getAttribute("msg")%>
+								</span>
 							</div>
 							<div class="form">
-								<form action="registServlet" method="post">
+								<form action="userServlet" method="post">
+									<input type="hidden" name="action" value="register"/>
 									<label>用户名称：</label>
 									<input class="itxt" type="text" placeholder="请输入用户名"
-										   value="wzg168"
+										   value=<%=request.getAttribute("username")==null ? "wzg168" : request.getAttribute("username")%>
 										   autocomplete="off" tabindex="1" name="username" id="username" />
 									<br />
 									<br />
@@ -131,7 +134,7 @@
 									<br />
 									<label>电子邮件：</label>
 									<input class="itxt" type="text" placeholder="请输入邮箱地址"
-										   value="wzg168@qq.com"
+										   value=<%=request.getAttribute("email")==null ? "wzg168@qq.com" : request.getAttribute("email")%>
 										   autocomplete="off" tabindex="1" name="email" id="email" />
 									<br />
 									<br />

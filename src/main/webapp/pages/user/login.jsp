@@ -26,18 +26,21 @@
 							</div>
 							<div class="msg_cont">
 								<b></b>
-								<span class="errorMsg">请输入用户名和密码</span>
+								<span class="errorMsg"><%=request.getAttribute("msg") == null ? "请输入用户名和密码" :
+										request.getAttribute("msg")%></span>
 							</div>
 							<div class="form">
-								<form action="loginServlet" method="post">
+								<form action="userServlet" method="post">
+									<input type="hidden" name="action" value="login"/>
 									<label>用户名称：</label>
 									<input class="itxt" type="text" placeholder="请输入用户名"
-										   autocomplete="off" tabindex="1" name="username" />
+										   autocomplete="off" tabindex="1" name="username"
+									value = "<%=request.getAttribute("username") == null ? "admin" : request.getAttribute("username")%>"/>
 									<br />
 									<br />
 									<label>用户密码：</label>
 									<input class="itxt" type="password" placeholder="请输入密码"
-										   autocomplete="off" tabindex="1" name="password" />
+										   autocomplete="off" tabindex="1" name="password" value="admin"/>
 									<br />
 									<br />
 									<input type="submit" value="登录" id="sub_btn" />
