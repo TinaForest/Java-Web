@@ -1,31 +1,25 @@
 package org.example.servlet.web;
 
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.apache.commons.beanutils.BeanUtils;
 import org.example.servlet.pojo.User;
 import org.example.servlet.service.UserService;
 import org.example.servlet.service.impl.UserServiceImpl;
+import org.example.servlet.utils.WebUtils;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 
-public class UserServlet extends HttpServlet {
+
+public class UserServlet extends BaseServlet {
     private final UserService userService = new UserServiceImpl();
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String action = req.getParameter("action");
-        if (action.equals("login")) {
-            login(req, resp);
-        } else if (action.equals("register")) {
-            register(req, resp);
-        }
-    }
 
     protected void login(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
-        String password = req.getParameter("password");
-        User loginUser = userService.login(new User(null, username, password, null));
+        User user = WebUtils.copyParamToBean(req.getParameterMap(), new User());
+        User loginUser = userService.login(user);
         if (loginUser != null) {
             //success
             req.getRequestDispatcher("/pages/user/login_success.jsp").forward(req, resp);
@@ -39,7 +33,6 @@ public class UserServlet extends HttpServlet {
 
     protected void register(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
-        String password = req.getParameter("password");
         String email = req.getParameter("email");
         String code = req.getParameter("code");
 
@@ -50,7 +43,8 @@ public class UserServlet extends HttpServlet {
                 req.setAttribute("email", email);
                 req.getRequestDispatcher("/pages/user/register.jsp").forward(req, resp);
             } else {
-                userService.registUser(new User(null, username, password, email));
+                User user = WebUtils.copyParamToBean(req.getParameterMap(), new User());
+                userService.registUser(user);
                 req.getRequestDispatcher("/pages/user/register_success.jsp").forward(req, resp);
             }
         } else {
