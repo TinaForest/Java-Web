@@ -14,4 +14,18 @@ public class WebUtils {
         }
         return bean;
     }
+
+    public static int parseInt(String str, int defaultValue) {
+
+        if (str == null || str.trim().isEmpty()) {
+            return defaultValue;
+        }
+        str = str.trim();
+        try {
+            return Integer.parseInt(str);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return defaultValue;
+    }
 }
