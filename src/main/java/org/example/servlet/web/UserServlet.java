@@ -22,6 +22,8 @@ public class UserServlet extends BaseServlet {
         User loginUser = userService.login(user);
         if (loginUser != null) {
             //success
+            //保存用户登录信息到session
+            req.getSession().setAttribute("user", loginUser);
             req.getRequestDispatcher("/pages/user/login_success.jsp").forward(req, resp);
         } else {
             req.setAttribute("msg", "用户名或密码错误！");
@@ -53,5 +55,11 @@ public class UserServlet extends BaseServlet {
             req.setAttribute("email", email);
             req.getRequestDispatcher("/pages/user/register.jsp").forward(req, resp);
         }
+    }
+
+    protected void logout(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        req.getSession().invalidate();
+        resp.sendRedirect(req.getContextPath() + "/");
+
     }
 }
