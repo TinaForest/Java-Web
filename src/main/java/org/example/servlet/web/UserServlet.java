@@ -11,6 +11,7 @@ import org.example.servlet.utils.WebUtils;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import com.pig4cloud.captcha.utils.CaptchaJakartaUtil;
 
 
 public class UserServlet extends BaseServlet {
@@ -38,7 +39,7 @@ public class UserServlet extends BaseServlet {
         String email = req.getParameter("email");
         String code = req.getParameter("code");
 
-        if(code.equalsIgnoreCase("abcde")) {
+        if(CaptchaJakartaUtil.ver(code, req)) {
             if (userService.existsUsername(username)) {
                 req.setAttribute("msg", "用户名已存在！");
                 req.setAttribute("username", username);
@@ -55,6 +56,8 @@ public class UserServlet extends BaseServlet {
             req.setAttribute("email", email);
             req.getRequestDispatcher("/pages/user/register.jsp").forward(req, resp);
         }
+
+        CaptchaJakartaUtil.clear(req);
     }
 
     protected void logout(HttpServletRequest req, HttpServletResponse resp) throws IOException {

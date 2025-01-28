@@ -8,6 +8,11 @@
 		<script type="text/javascript">
 			// 页面加载完成之后
 			$(function () {
+				//给验证码图片绑定单击事件
+				$("#code_img").click(function () {
+					this.src = "${basePath}captcha?d=" + new Date();
+				})
+
 				// 给注册绑定单击事件
 				$("#sub_btn").click(function () {
 					// 验证用户名：必须由字母，数字下划线组成，并且长度为5到12位
@@ -139,8 +144,8 @@
 									<br />
 									<br />
 									<label>验证码：</label>
-									<input class="itxt" type="text" name="code" style="width: 150px;" id="code" value="abcde"/>
-									<img alt="" src="static/img/code.bmp" style="float: right; margin-right: 40px">
+									<input class="itxt" type="text" name="code" style="width: 120px;" id="code"/>
+									<img id="code_img" alt="" src="/captcha" width="108px" height="40px" style="float: right; margin-right: 45px">
 									<br />
 									<br />
 									<input type="submit" value="注册" id="sub_btn" />

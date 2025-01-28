@@ -28,5 +28,12 @@
         <servlet-name>ClientBookServlet</servlet-name>
         <url-pattern>/client/bookServlet</url-pattern>
     </servlet-mapping>
-
+    <servlet>
+        <servlet-name>CaptchaServlet</servlet-name>
+        <servlet-class>com.pig4cloud.captcha.servlet.CaptchaJakartaServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CaptchaServlet</servlet-name>
+        <url-pattern>/captcha</url-pattern>
+    </servlet-mapping>
 </web-app>
