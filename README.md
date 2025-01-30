@@ -18,3 +18,22 @@ OpenJDK	19.0.2
 Maven	3.9.8
 
 Jakarta EE	9.1.0
+
+## IDEA tips
+**Alt insert**  
+Generate code (Getters, Setters, Constructors, toString...)
+
+**Ctrl Alt V**  
+Introduce local variable shortcut
+
+**Ctrl Shift T**<br />
+Create new Test
+
+**Ctrl X**<br />
+delete one line
+
+**Tab**<br />
+html/jsp input:text+tab => automatically generate tags
+
+**Alt Enter**<br />
+operation hint

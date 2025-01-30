@@ -36,4 +36,13 @@
         <servlet-name>CaptchaServlet</servlet-name>
         <url-pattern>/captcha</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>CartServlet</servlet-name>
+        <servlet-class>org.example.servlet.web.CartServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CartServlet</servlet-name>
+        <url-pattern>/cartServlet</url-pattern>
+    </servlet-mapping>
+
 </web-app>
