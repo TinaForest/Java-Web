@@ -37,3 +37,7 @@ html/jsp input:text+tab => automatically generate tags
 
 **Alt Enter**<br />
 operation hint
+
+## Database tips
+**User**: root <br />
+**Password**: tyf000312
