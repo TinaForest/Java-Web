@@ -28,8 +28,6 @@ public abstract class BaseDao {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
-        } finally {
-            JdbcUtils.close(connection);
         }
     }
 
@@ -49,8 +47,6 @@ public abstract class BaseDao {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
-        } finally {
-            JdbcUtils.close(connection);
         }
     }
 
@@ -71,10 +67,7 @@ public abstract class BaseDao {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
-        } finally {
-            JdbcUtils.close(connection);
         }
-
     }
 
     /**
@@ -91,8 +84,6 @@ public abstract class BaseDao {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
-        } finally {
-            JdbcUtils.close(connection);
         }
     }
 }

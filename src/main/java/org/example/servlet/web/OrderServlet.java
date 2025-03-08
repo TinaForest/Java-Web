@@ -10,6 +10,7 @@ import org.example.servlet.pojo.Cart;
 import org.example.servlet.pojo.User;
 import org.example.servlet.service.OrderService;
 import org.example.servlet.service.impl.OrderServiceImpl;
+import org.example.servlet.utils.JdbcUtils;
 
 public class OrderServlet extends BaseServlet{
     private OrderService orderService = new OrderServiceImpl();
@@ -29,6 +30,7 @@ public class OrderServlet extends BaseServlet{
         }
         Integer userId = user.getId();
         String orderId = orderService.createOrder(cart, userId);
+
         req.getSession().setAttribute("orderId", orderId);
 //        req.getRequestDispatcher("pages/cart/checkout.jsp").forward(req, resp);
         resp.sendRedirect(req.getContextPath() + "/pages/cart/checkout.jsp");

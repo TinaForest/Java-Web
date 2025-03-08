@@ -23,6 +23,7 @@ public abstract class BaseServlet extends HttpServlet {
             declaredMethod.invoke(this, req, resp);
         } catch (Exception e) {
             e.printStackTrace();
+            throw new RuntimeException(e); //把异常抛给过滤器
         }
     }
 }
