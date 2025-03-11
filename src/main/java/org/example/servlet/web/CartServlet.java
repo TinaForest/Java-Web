@@ -1,5 +1,6 @@
 package org.example.servlet.web;
 
+import com.google.gson.Gson;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -11,6 +12,8 @@ import org.example.servlet.service.impl.BookServiceImpl;
 import org.example.servlet.utils.WebUtils;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CartServlet extends BaseServlet {
     /**
@@ -93,5 +96,30 @@ public class CartServlet extends BaseServlet {
             resp.sendRedirect(req.getHeader("Referer"));
         }
 
+    }
+
+    protected void ajaxAddItem(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        BookService bookService = new BookServiceImpl();
+        //获取请求的参数商品编号
+        int id = WebUtils.parseInt(req.getParameter("id"), 0);
+        //调用bookService得到图书信息
+        Book book = bookService.queryById(id);
+        //把图书信息转化成商品项CartItem
+        CartItem cartItem = new CartItem(book.getId(), book.getName(), 1, book.getPrice(), book.getPrice());
+        //调用Cart.addItem()添加商品项
+        Cart cart = (Cart) req.getSession().getAttribute("cart");
+        if (cart == null) {
+            cart = new Cart();
+            req.getSession().setAttribute("cart", cart);
+        }
+        cart.addItem(cartItem);
+        req.getSession().setAttribute("lastName", cartItem.getName());
+        //返回购物车总的商品数量和最后一个cartItem的名字
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("totalCount", cart.getTotalCount());
+        resultMap.put("lastName", cartItem.getName());
+        Gson gson = new Gson();
+        String gsonJson = gson.toJson(resultMap);
+        resp.getWriter().write(gsonJson);
     }
 }

@@ -15,7 +15,12 @@
 				 * @type {*|jQuery}
 				 */
 				var bookId = $(this).attr("bookId");
-				location.href="http://localhost:8080/cartServlet?action=addItem&id=" + bookId;
+				// location.href="http://localhost:8080/cartServlet?action=addItem&id=" + bookId;
+				//发ajax请求，添加商品到购物车
+				$.getJSON("http://localhost:8080/cartServlet", "action=ajaxAddItem&id=" + bookId, function (data) {
+					$("#cartTotalCount").text("您的购物车中有 " + data.totalCount + " 件商品");
+					$("span.cartLastName").text("您刚刚将 " + data.lastName + " 加入购物车中");
+				})
 			});
 		});
 	</script>
@@ -54,14 +59,14 @@
 					<%--购物车为空的输出--%>
 					<span id="cartTotalCount"> </span>
 					<div>
-						<span style="color: red" id="cartLastName">当前购物车为空</span>
+						<span style="color: red" class="cartLastName">当前购物车为空</span>
 					</div>
 				</c:if>
 				<c:if test="${not empty sessionScope.cart.items}">
 					<%--购物车非空的输出--%>
 					<span id="cartTotalCount">您的购物车中有 ${sessionScope.cart.totalCount} 件商品</span>
 					<div>
-						您刚刚将<span style="color: red" id="cartLastName">${sessionScope.lastName}</span>加入到了购物车中
+						<span style="color: red" class="cartLastName">您刚刚将 ${sessionScope.lastName} 加入购物车中</span>
 					</div>
 				</c:if>
 			</div>

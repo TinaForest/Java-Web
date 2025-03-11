@@ -30,10 +30,13 @@ Introduce local variable shortcut
 Create new Test
 
 **Ctrl X**<br />
-delete one line
+Delete one line
+
+**Ctrl Shift Up/Down**<br />
+Move the entire line of code up or down
 
 **Tab**<br />
-html/jsp input:text+tab => automatically generate tags
+In html/jsp, input:text+tab => automatically generate tags
 
 **Alt Enter**<br />
 operation hint
