@@ -16,8 +16,6 @@ public abstract class BaseServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
-        //解决响应的中文乱码
-        resp.setContentType("text/html; chatset=UTF-8");
         String action = req.getParameter("action");
         Method declaredMethod;
         try {

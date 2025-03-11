@@ -1,6 +1,5 @@
 package org.example.servlet.web;
 
-import com.google.gson.Gson;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -12,9 +11,6 @@ import org.example.servlet.utils.WebUtils;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
-import java.util.Map;
-
 import com.pig4cloud.captcha.utils.CaptchaJakartaUtil;
 
 
@@ -67,20 +63,6 @@ public class UserServlet extends BaseServlet {
     protected void logout(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         req.getSession().invalidate();
         resp.sendRedirect(req.getContextPath() + "/");
-
-    }
-
-    protected void ajaxExistsUsername(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //获取请求的参数
-        String username = req.getParameter("username");
-        //调用service
-        boolean existsUsername = userService.existsUsername(username);
-        Map<String, Object> map = new HashMap<>();
-        map.put("existsUsername", existsUsername);
-        Gson gson = new Gson();
-        String json = gson.toJson(map);
-        //通过相应的字符输出流输出
-        resp.getWriter().write(json);
 
     }
 }
